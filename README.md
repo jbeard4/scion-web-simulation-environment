@@ -1,0 +1,1 @@
+A simple web-based simulation environment for the SCION SCXML interpreter. Provides a text editor on the left, and simple controls to load an SCXML file, as well as send events, and inspect the resulting configurations.
