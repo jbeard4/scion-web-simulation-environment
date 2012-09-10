@@ -1,0 +1,23 @@
+#scxmlContent {
+    width : 100%;
+    height : 85%;
+}
+
+#scxmlTrace {
+    border : black solid 1px;
+    width : 100%;
+    height : 85%;
+}
+
+
+div#left {
+    float:left;
+    height:100%;
+    width:50%;
+}
+
+div#right {
+    float:right;
+    height:100%;
+    width:50%;
+}
