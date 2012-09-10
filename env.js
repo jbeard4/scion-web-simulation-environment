@@ -7,7 +7,9 @@ $(document).ready(function(){
         initScxmlButton = $('#initScxmlButton'),
         scxmlTrace = $('#scxmlTrace'),
         scxmlSimulationControls = $('#scxmlSimulationControls'),
-        eventNameField = $('#eventNameField');
+        eventNameField = $('#eventNameField'),
+        logOnentryCheckbox = $('#logOnentry')[0],
+        logOnexitCheckbox = $('#logOnexit')[0];
 
     var scxmlInstance;
 
@@ -17,14 +19,15 @@ $(document).ready(function(){
         $(p).text(txt);
         scxmlTrace.append(p);
         $(p).fadeIn();
+        scxmlTrace.scrollTop(scxmlTrace.scrollTop()+1000);
     }
 
     var listener = {
         onEntry : function(stateId){
-            trace('entering ' + stateId);
+            if(logOnentryCheckbox.checked) trace('entering ' + stateId);
         },
         onExit : function(stateId){
-            trace('exiting ' + stateId);
+            if(logOnexitCheckbox.checked) trace('exiting ' + stateId);
         }
     };
 
