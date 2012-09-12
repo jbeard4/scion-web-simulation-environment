@@ -11,7 +11,8 @@ $(document).ready(function(){
         logOnentryCheckbox = $('#logOnentry')[0],
         logOnexitCheckbox = $('#logOnexit')[0];
 
-    var codeMirror = CodeMirror.fromTextArea(scxmlContent[0]);
+
+    var codeMirror = CodeMirror.fromTextArea(scxmlContent[0], window.location.search.match(/keyMap=vim/) ? {keyMap:'vim'} : undefined);
 
     var scxmlInstance;
 
