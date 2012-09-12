@@ -11,6 +11,8 @@ $(document).ready(function(){
         logOnentryCheckbox = $('#logOnentry')[0],
         logOnexitCheckbox = $('#logOnexit')[0];
 
+    var codeMirror = CodeMirror.fromTextArea(scxmlContent[0]);
+
     var scxmlInstance;
 
     function trace(txt){
@@ -38,13 +40,13 @@ $(document).ready(function(){
         //AJAX GET it
         //TODO: error handling
         $.get(pathToScxml,function(scxmlText){
-            scxmlContent.val(scxmlText);
+            codeMirror.setValue(scxmlText);
         },"text");
     });
 
     initScxmlButton.click(function(){
         //read the content and load it up
-        scion.documentStringToModel(scxmlContent.val(),function(err,model){
+        scion.documentStringToModel(codeMirror.getValue(),function(err,model){
             if(err){ 
                 alert(err.message);
                 throw err;
@@ -80,4 +82,5 @@ $(document).ready(function(){
 
         eventNameField.val(''); 
     }); 
+
 });

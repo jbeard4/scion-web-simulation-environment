@@ -3,6 +3,16 @@
     height : 85%;
 }
 
+div.CodeMirror {
+    width : 100%;
+    height : 85%;
+}
+
+.CodeMirror-scrollbar,.CodeMirror-scroll {
+    height : 100%;
+}
+
+
 #scxmlTrace {
     border : black solid 1px;
     width : 100%;
