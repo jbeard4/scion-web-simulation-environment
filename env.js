@@ -14,23 +14,16 @@ $(document).ready(function(){
 
     var codeMirror = CodeMirror.fromTextArea(scxmlContent[0], window.location.search.match(/keyMap=vim/) ? {keyMap:'vim'} : undefined);
 
-    var scxmlInstance;
-
-    function trace(txt){
-        var p = document.createElement('p');
-        p.setAttribute('style','display:none');
-        $(p).text(txt);
-        scxmlTrace.append(p);
-        $(p).fadeIn();
-        scxmlTrace.scrollTop(scxmlTrace.scrollTop()+1000);
-    }
+    var scxmlInstance, svg;
 
     var listener = {
         onEntry : function(stateId){
-            if(logOnentryCheckbox.checked) trace('entering ' + stateId);
+            console.log('onentry',stateId);
+            d3.select('#' + stateId).classed('highlighted',true);
         },
         onExit : function(stateId){
-            if(logOnexitCheckbox.checked) trace('exiting ' + stateId);
+            console.log('onexit',stateId);
+            d3.select('#' + stateId).classed('highlighted',false);
         }
     };
 
@@ -46,6 +39,9 @@ $(document).ready(function(){
     });
 
     initScxmlButton.click(function(){
+        var doc = (new DOMParser()).parseFromString(codeMirror.getValue(),"application/xml");
+        svg = ScxmlViz(scxmlTrace[0],doc);
+
         //read the content and load it up
         scion.documentStringToModel(codeMirror.getValue(),function(err,model){
             if(err){ 
@@ -63,7 +59,6 @@ $(document).ready(function(){
 
             var conf = scxmlInstance.start();
             
-            trace('started new scxml instance >> ' + JSON.stringify(conf));
         });
     });
 
@@ -78,8 +73,6 @@ $(document).ready(function(){
 
         var eventName = eventNameField.val(); 
         var conf = scxmlInstance.gen(eventName); 
-
-        trace(eventName + ' >> ' + JSON.stringify(conf));
 
         eventNameField.val(''); 
     }); 
