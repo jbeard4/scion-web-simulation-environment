@@ -8,9 +8,7 @@ $(document).ready(function(){
         scxmlTrace = $('#scxmlTrace'),
         scxmlSimulationControls = $('#scxmlSimulationControls'),
         eventNameField = $('#eventNameField'),
-        logOnentryCheckbox = $('#logOnentry')[0],
-        logOnexitCheckbox = $('#logOnexit')[0];
-
+        vizButton = $("#vizButton");
 
     var codeMirror = CodeMirror.fromTextArea(scxmlContent[0], window.location.search.match(/keyMap=vim/) ? {keyMap:'vim'} : undefined);
 
@@ -38,10 +36,13 @@ $(document).ready(function(){
         },"text");
     });
 
-    initScxmlButton.click(function(){
+    vizButton.click(function(){
+        scxmlTrace.empty();
         var doc = (new DOMParser()).parseFromString(codeMirror.getValue(),"application/xml");
-        svg = ScxmlViz(scxmlTrace[0],doc);
+        svg = ScxmlViz(scxmlTrace[0],doc,scxmlTrace.width(),scxmlTrace.height());
+    }); 
 
+    initScxmlButton.click(function(){
         //read the content and load it up
         scion.documentStringToModel(codeMirror.getValue(),function(err,model){
             if(err){ 
