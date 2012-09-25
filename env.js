@@ -10,6 +10,13 @@ $(document).ready(function(){
         eventNameField = $('#eventNameField'),
         vizButton = $("#vizButton");
 
+    $(document.documentElement).keypress(function(e){
+        console.log('e',e);
+        if(e.charCode === 10 && e.ctrlKey){
+            visualize();
+        }
+    });
+
     var codeMirror = CodeMirror.fromTextArea(scxmlContent[0], window.location.search.match(/keyMap=vim/) ? {keyMap:'vim'} : undefined);
 
     var scxmlInstance, svg;
@@ -17,11 +24,11 @@ $(document).ready(function(){
     var listener = {
         onEntry : function(stateId){
             console.log('onentry',stateId);
-            d3.select('#' + stateId).classed('highlighted',true);
+            d3.select(document.getElementById(stateId)).classed('highlighted',true);
         },
         onExit : function(stateId){
             console.log('onexit',stateId);
-            d3.select('#' + stateId).classed('highlighted',false);
+            d3.select(document.getElementById(stateId)).classed('highlighted',false);
         }
     };
 
@@ -36,11 +43,17 @@ $(document).ready(function(){
         },"text");
     });
 
-    vizButton.click(function(){
-        scxmlTrace.empty();
-        var doc = (new DOMParser()).parseFromString(codeMirror.getValue(),"application/xml");
-        svg = ScxmlViz(scxmlTrace[0],doc,scxmlTrace.width(),scxmlTrace.height());
-    }); 
+    function visualize(e){
+        try {
+            var doc = (new DOMParser()).parseFromString(codeMirror.getValue(),"application/xml");
+            scxmlTrace.empty();
+            svg = ScxmlViz(scxmlTrace[0],doc,scxmlTrace.width(),scxmlTrace.height());
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    vizButton.click(visualize);
 
     initScxmlButton.click(function(){
         //read the content and load it up
@@ -77,5 +90,7 @@ $(document).ready(function(){
 
         eventNameField.val(''); 
     }); 
+
+    //try auto-visualizing every 1s
 
 });
