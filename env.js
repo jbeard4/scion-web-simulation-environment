@@ -11,7 +11,6 @@ $(document).ready(function(){
         vizButton = $("#vizButton");
 
     $(document.documentElement).keypress(function(e){
-        console.log('e',e);
         if(e.charCode === 10 && e.ctrlKey){
             visualize();
         }
