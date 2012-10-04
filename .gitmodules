@@ -3,4 +3,7 @@
 	url = git://github.com/marijnh/CodeMirror.git
 [submodule "lib/scxml-viz"]
 	path = lib/scxml-viz
-	url = git://github.com/jbeard4/SCXML-viz.git
+	url = git://github.com/jbeard4/scxml-viz.git
+[submodule "lib/d3"]
+	path = lib/d3
+	url = git://github.com/jbeard4/d3.git
