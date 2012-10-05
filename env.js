@@ -22,6 +22,7 @@ $(document).ready(function(){
         scxmlTrace = $('#scxmlTrace'),
         scxmlSimulationControls = $('#scxmlSimulationControls'),
         eventNameField = $('#eventNameField'),
+        linkButton = $("#linkButton"),
         vizButton = $("#vizButton");
 
     $(document.documentElement).keypress(function(e){
@@ -36,14 +37,21 @@ $(document).ready(function(){
 
     var listener = {
         onEntry : function(stateId){
-            console.log('onentry',stateId);
+            //console.log('onentry',stateId);
             d3.select(document.getElementById(stateId)).classed('highlighted',true);
         },
         onExit : function(stateId){
-            console.log('onexit',stateId);
+            //console.log('onexit',stateId);
             d3.select(document.getElementById(stateId)).classed('highlighted',false);
         }
     };
+
+    if(window.location.hash){
+        //assume it's url-encoded content, so parse and init it
+        codeMirror.setValue(decodeURIComponent(window.location.hash.slice(1)));
+        visualize();
+        initInterpreter();
+    }
 
     //add behaviour
     function visualize(e){
@@ -56,9 +64,7 @@ $(document).ready(function(){
         }
     }
 
-    vizButton.click(visualize);
-
-    initScxmlButton.click(function(){
+    function initInterpreter(){
         //read the content and load it up
         scion.documentStringToModel(codeMirror.getValue(),function(err,model){
             if(err){ 
@@ -77,6 +83,14 @@ $(document).ready(function(){
             var conf = scxmlInstance.start();
             
         });
+    }
+
+    vizButton.click(visualize);
+
+    initScxmlButton.click(initInterpreter);
+
+    linkButton.click(function(){
+        window.location.hash = encodeURIComponent(codeMirror.getValue());
     });
 
     scxmlSimulationControls.submit(function(e){
