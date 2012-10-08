@@ -35,12 +35,14 @@
         <link rel="stylesheet" href="style.css"></link>
     </head>
     <body>
-        <div id="left">
+        <div id="left" class="pane">
             <textarea id="scxmlContent"></textarea>
-            <input type="button" id="vizButton" value="Visualize"/>
-            <input type="button" id="linkButton" value="Link"/>
+            <div id="codeControls">
+                <input type="button" id="vizButton" value="Visualize"/>
+                <input type="button" id="linkButton" value="Link"/>
+            </div>
         </div>
-        <div id="right">
+        <div id="right" class="pane">
             <div id="scxmlTrace"></div>
             <form id="scxmlSimulationControls">
                 <input type="button" id="initScxmlButton" value="Init"/>

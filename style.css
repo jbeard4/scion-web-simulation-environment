@@ -16,12 +16,25 @@
 
 #scxmlContent {
     width : 100%;
-    height : 85%;
+    height : 100%%;
 }
 
-div.CodeMirror {
+div.CodeMirror,#scxmlTrace  {
     width : 100%;
-    height : 85%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    bottom:40px;
+}
+
+#codeControls,#scxmlSimulationControls {
+    position:absolute;
+    bottom:20px;
+    height:10px;
+}
+
+#scxmlSimulationControls {
+    margin : 0px;
 }
 
 .CodeMirror-scrollbar,.CodeMirror-scroll {
@@ -34,20 +47,20 @@ div.CodeMirror {
 
 #scxmlTrace {
     border : black solid 1px;
-    width : 100%;
-    height : 85%;
-    overflow-y : auto;
 }
 
 
-div#left {
-    float:left;
+div.pane {
     height:100%;
     width:50%;
+    position:relative;
+}
+
+div#left {
+    float:left;
 }
 
 div#right {
     float:right;
-    height:100%;
-    width:50%;
 }
+
