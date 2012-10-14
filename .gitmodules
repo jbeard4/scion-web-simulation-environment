@@ -4,3 +4,6 @@
 [submodule "lib/d3"]
 	path = lib/d3
 	url = git://github.com/jbeard4/d3.git
+[submodule "lib/scxml-viz"]
+	path = lib/scxml-viz
+	url = git://github.com/jbeard4/scxml-viz.git
